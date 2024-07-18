@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Settings</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 50px;
+
+        }
+
+        .settings-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: left;
+        }
+
+        .setting-item {
+            margin-bottom: 15px;
+            color: white;
+
+            background-color: lightgrey;
+            color: black;
+            font-weight: bold;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            /* width: 300px; Adjust width as needed */
+        }
+
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+        input[type="text"],
+        select,
+        input[type="checkbox"],
+        input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .notification-preference {
+            background-color: #f7f7f7;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .notification-preference {
+            background-color: lightgrey;
+            color: black;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Hide the default checkbox */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Style the label to appear like a checkbox */
+        input[type="checkbox"]+label {
+            position: relative;
+            padding-left: 30px;
+            /* Adjust as needed */
+            cursor: pointer;
+        }
+
+        /* Style the checkbox appearance */
+        input[type="checkbox"]+label:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            /* Size of the checkbox */
+            height: 20px;
+            /* Size of the checkbox */
+            border: 1px solid #999;
+            /* Border color */
+            background-color: #fff;
+            /* Background color */
+        }
+
+        /* Style the checkbox when checked */
+        input[type="checkbox"]:checked+label:after {
+            background-color: #2196F3;
+            /* Example of a checked background color */
+        }
+
+        /* Optional: Style the checkmark inside the checkbox */
+        input[type="checkbox"]:checked+label:after {
+            content: '\2714';
+            /* Checkmark unicode character */
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            font-size: 16px;
+            color: #fff;
+            /* Checkmark color */
+        }
+
+
+        .notification-preference h2 {
+            margin-bottom: 10px;
+        }
+
+        .notification-preference fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .notification-preference legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .notification-preference .notification-option {
+            margin-bottom: 10px;
+        }
+
+        .notification-preference label {
+            cursor: pointer;
+        }
+
+
+        .sources-preference {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sources-preference input[type="checkbox"] {
+            margn-right: 10px;
+        }
+
+        .location-setting {
+            background-color: #f9f9f9;
+            color: black;
+            font-weight: bold;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .location-setting {
+            background-color: lightgrey;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .location-setting h2 {
+            margin-bottom: 10px;
+        }
+
+        .location-setting form {
+            margin-bottom: 15px;
+        }
+
+        .location-setting label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .location-setting .input-group {
+            display: flex;
+        }
+
+        .location-setting input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 3px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .location-setting .location-status {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .location-setting .location-status span {
+            font-weight: bold;
+        }
+
+        .language-setting {
+            background-color: lightgrey;
+            color: black;
+            font-weight: bold;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .language-setting h2 {
+            margin-bottom: 10px;
+        }
+
+        .language-setting form {
+            margin-bottom: 15px;
+        }
+
+        .language-setting label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .language-setting select {
+            width: 100%;
+            padding: 8px;
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .theme-setting {
+            background-color: lightgrey;
+            font-weight: bold;
+            color: black;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .theme-setting h2 {
+            margin-bottom: 10px;
+        }
+
+        .theme-setting form {
+            margin-bottom: 15px;
+        }
+
+        .theme-setting label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .theme-setting select {
+            width: 100%;
+            padding: 8px;
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .map-preference {
+            background-color: lightgrey;
+            color: black;
+            font-weight: bold;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .map-options {
+            margin-top: 10px;
+        }
+
+        .map-options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .map-options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+
+        .data-refresh-frequency {
+            background-color: lightgrey;
+            color: black;
+            font-weight: bold;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            /* width: 300px; Adjust width as needed */
+        }
+
+        .data-refresh-frequency h2 {
+            margin-bottom: 10px;
+        }
+
+        .data-refresh-frequency label {
+            display: block;
+            font-weight: medium;
+            margin-bottom: 8px;
+        }
+
+        .data-refresh-frequency select {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 3px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .privacy-data-usage {
+            background-color: lightgrey;
+            color: black;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-data-usage h2 {
+            margin-bottom: 10px;
+        }
+
+        .privacy-data-usage fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .privacy-data-usage legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .privacy-data-usage .privacy-option {
+            margin-bottom: 10px;
+        }
+
+        .privacy-data-usage label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .privacy-data-usage input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .data-sources {
+            background-color: lightgrey;
+            color: black;
+            border: 3px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .data-sources h2 {
+            margin-bottom: 10px;
+        }
+
+        .data-sources fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-sources legend {
+            color: black;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .data-sources .data-source-option {
+            margin-bottom: 10px;
+        }
+
+        .data-sources label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .data-sources input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body background="./image/black.png">
+    <form>
+        <div class="settings-container">
+            <h1>Settings</h1>
+
+            <!-- Temperature Units -->
+            <div class="setting-item">
+                <label for="temperatureUnits">Temperature Units:</label>
+                <select id="temperatureUnits">
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                </select>
+            </div>
+            <!-- Wind Speed Units -->
+            <div class="setting-item">
+                <label for="windSpeedUnits">Wind Speed Units:</label>
+                <select id="windSpeedUnits">
+                    <option value="kmh">Kilometers per Hour (km/h)</option>
+                    <option value="ms">Meters per Second (m/s)</option>
+                    <option value="mph">Miles per Hour (mph)</option>
+                </select>
+            </div>
+
+            <!-- Precipitation Units -->
+            <div class="setting-item">
+                <label for="precipitationUnits">Precipitation Units:</label>
+                <select id="precipitationUnits">
+                    <option value="mm">Millimeters (mm)</option>
+                    <option value="cm">Centimeters (cm)</option>
+                    <option value="in">Inches (in)</option>
+                </select>
+            </div>
+
+            <!-- Time Format -->
+            <div class="setting-item">
+                <label for="timeFormat">Time Format:</label>
+                <select id="timeFormat">
+                    <option value="12h">12-Hour</option>
+                    <option value="24h">24-Hour</option>
+                </select>
+            </div>
+            <!-- Location Settings -->
+            <h2>Location</h2>
+            <div class="location-setting">
+                <form id="location-form">
+                    <label for="location-input">Enter your location:</label>
+                    <div class="input-group">
+                        <input type="text" id="location-input" name="location" placeholder="City, ZIP code, etc."
+                            required>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Notification Preferences -->
+
+            <h2>Notification Preferences</h2>
+            <div class="notification-preference">
+
+                <form id="notification-form">
+                    <fieldset>
+                        <legend>Choose your notification preferences:</legend>
+                        <div class="notification-option">
+                            <input type="checkbox" id="notify-email">
+                            <label for="notify-email">Email Notifications</label>
+                        </div>
+                        <div class="notification-option">
+                            <input type="checkbox" id="notify-sms">
+                            <label for="notify-sms">SMS Notifications</label>
+                        </div>
+                        <div class="notification-option">
+                            <input type="checkbox" id="notify-push">
+                            <label for="notify-push">Push Notifications</label>
+                        </div>
+                        <!-- Add more checkboxes for additional notification options -->
+                    </fieldset>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Theme Selection -->
+            <h2>Theme</h2>
+            <div class="theme-setting">
+
+                <form id="theme-form">
+                    <label for="theme-select">Select your preferred theme:</label>
+                    <select id="theme-select" name="theme">
+                        <option value="light">Light Theme</option>
+                        <option value="dark">Dark Theme</option>
+                        <option value="blue">Blue Theme</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </form>
+            </div>
+
+
+
+            <!-- Language Selection -->
+            <h2>Language</h2>
+
+            <div class="language-setting">
+
+                <form id="language-form">
+                    <label for="language-select">Select your preferred language:</label>
+                    <select id="language-select" name="language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </form>
+
+
+
+                <input type="checkbox" id="auto-translate" name="auto-translate">
+                <label for="auto-translate">Auto-translate:</label>
+                <span>(Enable to automatically translate weather information)</span>
+            </div>
+
+
+
+            <!-- Map Preferences -->
+            <h2>Map Preferences</h2>
+            <div id="map-preferences">
+                <div class="map-preference">
+
+                    <p>Select your preferred map type:</p>
+                    <div class="map-options">
+                        <label>
+                            <input type="radio" name="map-type" value="radar">
+                            Radar Map
+                        </label>
+                        <label>
+                            <input type="radio" name="map-type" value="satellite">
+                            Satellite Map
+                        </label>
+                        <label>
+                            <input type="radio" name="map-type" value="temperature">
+                            Temperature Map
+                        </label>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- Data Sources -->
+            <h2>Data Sources</h2>
+            <div class="data-sources">
+
+                <form id="data-sources-form">
+                    <fieldset>
+                        <legend>Select your preferred data sources:</legend>
+                        <div class="data-source-option">
+                            <input type="checkbox" id="weather-service" name="data-source" value="weather-service">
+                            <label for="weather-service">Weather Service</label>
+                        </div>
+                        <div class="data-source-option">
+                            <input type="checkbox" id="satellite-images" name="data-source" value="satellite-images">
+                            <label for="satellite-images">Satellite Images</label>
+                        </div>
+                        <div class="data-source-option">
+                            <input type="checkbox" id="forecast-models" name="data-source" value="forecast-models">
+                            <label for="forecast-models">Forecast Models</label>
+                        </div>
+                        <div class="data-source-option">
+                            <input type="checkbox" id="user-reports" name="data-source" value="user-reports">
+                            <label for="user-reports">User Reports</label>
+                        </div>
+                        <!-- Add more checkboxes for additional data sources -->
+                    </fieldset>
+                </form>
+            </div>
+
+
+            <!-- Data Refresh Frequency -->
+            <h2>Data Refresh Frequency</h2>
+            <div class="data-refresh-frequency">
+
+                <form id="refresh-frequency-form">
+                    <label for="refresh-frequency-select">Select your preferred data refresh frequency:</label>
+                    <select id="refresh-frequency-select" name="refresh-frequency">
+                        <option value="15">Every 15 minutes</option>
+                        <option value="30">Every 30 minutes</option>
+                        <option value="1 hour">Every 1 hour</option>
+                        <!-- Add more options for additional refresh frequencies -->
+                    </select>
+                </form>
+            </div>
+
+            <!-- Accessibility Options -->
+            <h2>Accessibility Options</h2>
+            <div class="setting-item">
+                <label for="textSize">Adjust Text Size:</label>
+                <input type="range" id="textSize" min="80" max="200" value="100">
+            </div>
+
+            <!-- Privacy and Data Usage -->
+            <h2>Privacy and Data Usage</h2>
+            <div class="privacy-data-usage">
+                <form id="privacy-data-form">
+                    <fieldset>
+                        <legend>Choose your privacy and data usage preferences:</legend>
+                        <div class="privacy-option">
+                            <input type="checkbox" id="data-collection" name="privacy" value="data-collection">
+                            <label for="data-collection">Allow Data Collection</label>
+                        </div>
+                        <div class="privacy-option">
+                            <input type="checkbox" id="share-data" name="privacy" value="share-data">
+                            <label for="share-data">Share Anonymous Data for Analytics</label>
+                        </div>
+                        <div class="privacy-option">
+                            <input type="checkbox" id="personalized-content" name="privacy"
+                                value="personalized-content">
+                            <label for="personalized-content">Personalized Content Based on Usage</label>
+                        </div>
+                        <div class="privacy-option">
+                            <input type="checkbox" id="cookie-policy" name="privacy" value="cookie-policy">
+                            <label for="cookie-policy">Agree to Cookie Policy</label>
+                        </div>
+                        <div class="privacy-option">
+                            <input type="checkbox" id="third-partySharing" name="privacy" value="third-partySharing">
+                            <label for="third-partySharing">Allow Third-Party Sharing</label>
+                        </div>
+                        <!-- Add more checkboxes for additional privacy options -->
+                    </fieldset>
+                </form>
+            </div>
+
+
+            <!-- Help and Support -->
+            <h2>Help and Support</h2>
+            <div id="help-support">
+
+                <div>
+                    <p>Contact Support:</p>
+                    <a href="/contact">Contact Us</a>
+                </div>
+                <div>
+                    <p>FAQs:</p>
+                    <a href="/faqs">Frequently Asked Questions</a>
+                </div>
+                <div>
+                    <p>Feedback:</p>
+                    <a href="/feedback">Give Feedback</a>
+                </div>
+            </div>
+
+
+
+            <!-- About
+        <h2>About</h2>
+        <div id="about-section">
+    <h3>About Our Weather Service:</h3>
+    <div>
+        <h4>Welcome:</h4>
+        <p>Welcome to our weather service! We are dedicated to providing accurate and timely weather information to help you plan your day.</p>
+    </div>
+    <div>
+        <h4>Our Mission:</h4>
+        <p>Our mission is to deliver reliable weather forecasts and updates, ensuring you stay informed and prepared for any weather conditions.</p>
+    </div>
+    <div>
+        <h4>Features:</h4>
+        <ul>
+            <li>Hourly and daily weather forecasts</li>
+            <li>Interactive maps and radar</li>
+            <li>Severe weather alerts</li>
+            <li>Customizable settings</li>
+        </ul>
+    </div>
+<div>
+        <h4>Contact Information:</h4>
+        <p>Email: info@example.com</p>
+        <p>Phone: +1234567890</p>
+    </div>
+    <div>
+        <h4>Website:</h4>
+        <a href="https://www.example.com">www.example.com</a>
+    </div>
+    <div>
+        <h4>Address:</h4>
+        <p>123 Weather St, City, Country</p>
+    </div>
+    <div>
+        <h4>Privacy Policy:</h4>
+        <a href="/privacy-policy">View Privacy Policy</a>
+    </div>
+    <div>
+        <h4>Terms of Service:</h4>
+        <a href="/terms-of-service">View Terms of Service</a>
+    </div>
+    <div>
+        <h4>Feedback:</h4>
+        <p>We value your feedback! Feel free to <a href="/feedback">give us your feedback</a> to help us improve our service.</p>
+    </div>
+</div>
+-->
+
+            <button id="saveSettings">Save Settings</button>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>

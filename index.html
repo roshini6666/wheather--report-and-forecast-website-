@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast Homepage</title>
+    <link rel="stylesheet" href="settings.html">
+    <style>
+        *body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .forecast-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .forecast-item {
+            background-color: powderblue;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+            color: black;
+        }
+
+        .forecast-item time {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .forecast-item .temperature {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .forecast-item .description {
+            color: #666666;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        label {
+            font-size: 20px;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .tab-button {
+            background: grey;
+            color: white;
+            font-weight: bold;
+            margin: 0 30px;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.3s;
+        }
+
+        .tab-button:hover {
+            background: grey;
+        }
+
+        table {
+            width: 100;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 3px solid #ddd;
+            font-size: 20px;
+            color: white;
+        }
+
+
+        header {
+            background-color: lightgrey;
+            color: #fff;
+            padding: 10px 0;
+            border-bottom: 2px solid #0056b3;
+        }
+
+        header .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .current-weather,
+        .hourly-forecast,
+        .daily-forecast {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .current-weather .location-selector {
+            margin-bottom: 18px;
+        }
+
+        .current-weather .weather-details {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .current-weather .temperature {
+            font-size: 70px;
+            font-weight: bold;
+        }
+
+        .current-weather .weather-icon {
+            margin: 0 20px;
+        }
+
+        .current-weather .details {
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .hourly-cards,
+        .daily-cards {
+            display: flex;
+            justify-content: space-around;
+            overflow-x: auto;
+        }
+
+        .hourly-card,
+        .daily-card {
+            text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 10px;
+        }
+
+        .hourly-card img,
+        .daily-card img {
+            width: 50px;
+            height: 50px;
+        }
+
+        footer {
+            background-color: lightgrey;
+            color: black;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        footer nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        footer nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body background="./image/black.png" ;>
+    <header>
+        <div class="container">
+            <img src="./image/img12.png" alt="Weather App Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="header.html" class="tab-button">Home</a></li>
+                    <li><a href="map.html" class="tab-button">Map</a></li>
+                    <li><a href="news.html" class="tab-button">News and Articles</a></li>
+                    <li><a href="setting.html" class="tab-button">Setting</a></li>
+                    <li><a href="about.html" class="tab-button">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="current-weather">
+                <h2>Current Weather</h2>
+                <div id="location-settings">
+
+                    <form id="location-form">
+
+                        <label for="location-input">Enter Location:</label>
+                        <select id="location-input" name="location-input">
+                            <option value="">--Enter city name--</option>
+                            <option value="sagar">Sagar</option>
+                            <option value="sorab">Sorab</option>
+                            <option value="banglore">Banglore</option>
+                            <option value="siddapura">Siddapur</option>
+                            <option value="manglore">Manglore</option>
+                        </select>
+                        <input type="submit" value="Get Weather">
+                    </form>
+                    <div id="weather-info">
+
+                    </div>
+                </div>
+
+                <script>
+                    function selectLocation(location) {
+                        // Implement logic to set selected location
+                        document.getElementById('location-input').value = location;
+                        // Optionally, submit the form or perform other actions
+                        // Example: document.getElementById('search-form').submit();
+                    }
+
+                    function useCurrentLocation() {
+                        // Implement logic to use geolocation API
+                        // Example: navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                        alert('Geolocation feature is not implemented in this example.');
+                    }
+                </script>
+
+                <div class="weather-details">
+                    <div class="temperature">25°C</div>
+                    <div class="weather-icon">
+                        <img src="./image/img8.png" width="400" heigth="4500">
+                    </div>
+                    <div class="details">
+                        <p>Humidity: 60%</p>
+                        <p>Wind: 10 km/h</p>
+                        <p>Precipitation: 0 mm</p>
+                    </div>
+                </div>
+            </section>
+            <section class="hourly-forecast">
+                <h1>Today's Forecast</h1>
+                <div class="forecast-container">
+                    <div class="forecast-item">
+                        <time>6:00 AM</time>
+                        <img src="./image/img8.png" width="80" height="50">
+                        <div class="temperature">25°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>9:00 AM</time>
+                        <img src="./image/img8.png" width="80" height="70">
+                        <div class="temperature">26°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>12:00 PM</time>
+                        <img src="./image/img7.png" width="80" height="60">
+                        <div class="temperature">33°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>3:00 PM</time>
+                        <img src="./image/img7.png" width="80" height="60">
+                        <div class="temperature">34°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>6:00 PM</time>
+                        <img src="./image/img7.png" width="80" height="60">
+                        <div class="temperature">32°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>9:00 PM</time>
+                        <img src="./image/img8.png" width="80" height="70">
+                        <div class="temperature">30°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>10:00 PM</time>
+                        <img src="./image/img9.png" width="80" height="70">
+                        <div class="temperature">26°C</div>
+
+                    </div>
+                    <div class="forecast-item">
+                        <time>1:00 AM</time>
+                        <img src="./image/img10.png" width="80" height="70">
+                        <div class="temperature">24°C</div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="daily-forecast">
+                <h2>Daily Forecast</h2>
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Temperature</th>
+                        <th>Weather</th>
+                        <th>Humidity</th>
+                        <th>Wind</th>
+                    </tr>
+                    <tr>
+                        <td>Sun 07</td>
+                        <td>30°C </td>
+                        <td>Sunny</td>
+                        <td>50%</td>
+                        <td>15 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Mon 08</td>
+                        <td>28°C </td>
+                        <td>partly Cloudy</td>
+                        <td>55%</td>
+                        <td>10 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Tue 09</td>
+                        <td>25°C </td>
+                        <td>Rainy</td>
+                        <td>70%</td>
+                        <td>20 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Wed 10</td>
+                        <td>26°C </td>
+                        <td>Partly Cloudy</td>
+                        <td>50%</td>
+                        <td>10 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Thu 11</td>
+                        <td>29°C </td>
+                        <td>Sunny</td>
+                        <td>50%</td>
+                        <td>15 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Fri 12</td>
+                        <td>33°C </td>
+                        <td>Sunny</td>
+                        <td>40%</td>
+                        <td>10 km/h</td>
+                    </tr>
+                    <tr>
+                        <td>Sat 13</td>
+                        <td>24°C </td>
+                        <td>Rainy</td>
+                        <td>55%</td>
+                        <td>15 km/h</td>
+                    </tr>
+                </table>
+                <style>
+                    #daily-forecast {
+                        margin-top: 20px;
+                        padding: 10px;
+                        border: 3px solid #ccc;
+                        border-radius: 5px;
+                        background-color: #f9f9f9;
+                        font-size: 18px
+                    }
+
+                    .forecast-day {
+                        margin-bottom: 15px;
+                        padding: 10px;
+                        border: 3px solid #ddd;
+                        border-radius: 5px;
+                        background-color: powderblue;
+                    }
+
+                    .forecast-day h4 {
+                        margin-top: 0;
+                    }
+
+                    .forecast-details {
+                        background-color: powderblue;
+                        margin-top: 10px;
+                    }
+
+                    .forecast-details p {
+                        margin: 5px 0;
+                    }
+                </style>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Weather Website. All rights reserved.</p>
+
+        </div>
+    </footer>
+</body>
+
+</html>

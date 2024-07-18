@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather News and Articles</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1500px;
+            margin: 20px auto;
+            padding: 20px;
+            color: black;
+        }
+
+        .news {
+            flex: 2;
+        }
+
+        .article {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: lightgrey;
+            border: 3px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .article h3 {
+            margin-bottom: 5px;
+        }
+
+        .article p {
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: grey;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .read-more:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar {
+            flex: 0.5;
+            color: white;
+            padding: 0px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            margin-left: 20px;
+            text-align: center;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 8px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar:hover {
+            color: white;
+        }
+
+            footer {
+                background-color: lightgrey;
+                color: black;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            footer nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            footer nav ul li {
+                display: inline;
+                margin: 0 10px;
+            }
+
+            footer nav ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 14px;
+            }
+    </style>
+</head>
+
+<body background="./image/black.png">
+    <header>
+        <h1>Weather News</h1>
+
+    </header>
+
+    <main class="container">
+        <section class="news">
+            <article class="article">
+                <h3>Severe Storm Alert</h3>
+                <p>Date: July 6th, 2024</p>
+                <p>Details: "A cold front moving in from the north is expected to bring scattered showers throughout the
+                    morning, clearing by midday with temperatures hovering around 15°C." "A persistent high-pressure
+                    system will keep skies clear and temperatures cool, with daytime highs around 20°C and overnight
+                    lows dropping to 8°C."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>New Weather Monitoring Technology</h3>
+                <p>Date: July 5th, 2024</p>
+                <p>Details:"Sunny skies dominate the forecast today, with temperatures reaching a high of 28°C by
+                    mid-afternoon. Light breezes from the southwest will keep conditions mild and pleasant"."Patchy
+                    morning fog will give way to partly cloudy skies by midday, with temperatures peaking at 22°C and
+                    light southerly winds".</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Record High Temperatures Across the Region</h3>
+                <p>Date: July 4th, 2024</p>
+                <p>Details: An approaching low-pressure system from the west will likely bring heavy rain and
+                    thunderstorms in the late evening, with potential gusty winds reaching up to 30 mph."A rapid
+                    temperature drop is expected tonight as a cold front moves through, bringing overnight lows near
+                    freezing and a chance of frost in rural areas."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Tips for Safe Driving in Foggy Conditions</h3>
+                <p>Date: July 3rd, 2024</p>
+                <p>Details:Morning fog is anticipated to dissipate by late morning, revealing mostly sunny skies and
+                    temperatures climbing to a balmy 30°C in the afternoon.""A heatwave is set to grip the region this
+                    weekend, with temperatures soaring to 35°C and heat index values making it feel closer to 40°C.".
+                </p>
+
+            </article>
+            <article class="article">
+                <h3>Preparing Your Home for Hurricane Season</h3>
+                <p>Date: July 2nd, 2024</p>
+                <p>Details:"A brief period of snow showers is expected early tomorrow morning, followed by a rapid
+                    clearing and sunshine breaking through, with temperatures remaining near freezing throughout the
+                    day.5. "A stationary front will stall over the area, resulting in several days of on-and-off showers
+                    and thunderstorms, with rainfall totals potentially exceeding 50 mm."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Weather Patterns Influencing Agricultural Harvests</h3>
+                <p>Date: July 1st, 2024</p>
+                <p>Details: "A high-pressure ridge settling over the area will ensure clear skies and dry conditions for
+                    the next three days, with daytime temperatures gradually warming from 20°C to 25°C.""A dry and gusty
+                    offshore wind pattern will elevate fire danger concerns across the region, prompting red flag
+                    warnings for heightened wildfire risk."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Local Weather Forecast for the Week Ahead</h3>
+                <p>Date: June 30th, 2024</p>
+                <p>Details:"Localized flooding is possible in low-lying areas due to prolonged heavy rainfall overnight,
+                    with rainfall totals expected to exceed 50 mm by morning.""Unseasonably warm temperatures are
+                    expected to persist through next week, with daytime highs averaging 28°C and overnight lows staying
+                    above 20°C."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Climate Change and its Impact on Urban Flooding</h3>
+                <p>Date: June 29th, 2024</p>
+                <p>Details:"Gusty northerly winds are forecasted to accompany a cold front passage, dropping
+                    temperatures to a brisk 10°C by evening with a chance of isolated snow flurries.""An approaching
+                    tropical disturbance may bring heavy rainfall and localized flooding to coastal areas, with gusty
+                    winds reaching up to 50 km/h."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Winter Storm Warning Issued for Northern States</h3>
+                <p>Date: June 28th, 2024</p>
+                <p>Details: "Humidity levels are set to rise significantly as a warm, moist air mass moves in from the
+                    Gulf, leading to a muggy afternoon with temperatures reaching 32°C.""A dust storm originating from
+                    the desert to the east is forecasted to reduce visibility to less than 1 km, prompting travel
+                    advisories and safety precautions."</p>
+
+            </article>
+
+            <article class="article">
+                <h3>Spring Blossoms Delayed by Unseasonably Cold Weather</h3>
+                <p>Date: June 27th, 2024</p>
+                <p>Details: "A coastal storm is anticipated to bring rough seas and high surf conditions, prompting a
+                    marine warning for boaters and beachgoers throughout the weekend.""A cold air mass descending from
+                    the north will usher in the first snowfall of the season, accumulating 5-10 cm over higher
+                    elevations and causing slick road conditions."</p>
+
+        </section>
+
+        <aside class="sidebar">
+            <h2>Weather Tips</h2>
+            <ul>
+                <li><a href="#">How to Prepare for a Heatwave</a></li>
+                <li><a href="#">Winter Safety Tips</a></li>
+                <li><a href="#">Hurricane Preparedness</a></li>
+                <li><a href="#">Understanding Weather Forecasts</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <!--<footer>
+		<div class="container">
+        <p>&copy; 2024 Weather News Website. All rights reserved.</p>
+		</div>
+    </footer>-->
+</body>
+
+</html>

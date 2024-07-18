@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: lightgrey;
+        }
+
+        .map-container {
+            height: 400px;
+            margin-bottom: 20px;
+            border: 10px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .controls input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .controls button,
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .zoom-controls {
+            display: flex;
+        }
+
+        .controls input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .zoom-controls {
+            display: flex;
+        }
+
+        .zoom-controls button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .zoom-controls button:first-child {
+            margin-left: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.9;
+            background-color: #f0f0f0;
+        }
+
+        .map-container {
+            grid-column: span 2;
+            height: 500px;
+            margin-bottom: 20px;
+            border: 3px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .section {
+            background-color: light grey;
+            padding: 20px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .event {
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .event h3 {
+            margin-bottom: 5px;
+        }
+
+        .poi {
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .poi h3 {
+            margin-bottom: 5px;
+        }
+
+        #pointsOfInterestContent {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #custom-layer-section {
+            display: none;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        #user-reviews-section {
+            display: none;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        #events-activities-section {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body background="./image/black.png">
+    <div class="container">
+        <div class="directions section">
+            <h2>Directions</h2>
+            <!-- Directions and routing UI -->
+            <form>
+                <label for="start">Start Address:</label>
+                <input type="text" id="start" name="start"><br><br>
+                <label for="end">Destination Address:</label>
+                <input type="text" id="end" name="end"><br><br>
+                <button type="submit">Get Directions</button>
+            </form>
+            <div id="directionsPanel">
+                <!-- Directions results will be displayed here -->
+            </div>
+        </div>
+        <div class="container">
+            <div class="map-container">
+                <img src="./image/map.png" width="1200" height="500">
+                <!-- Interactive map goes here -->
+                <div id="map"></div>
+            </div>
+            <div class="controls">
+                <input type="text" id="searchInput" placeholder="Search location">
+                <button id="searchButton">Search</button>
+                <div class="zoom-controls">
+                    <button id="zoomIn">+</button>
+                    <button id="zoomOut">-</button>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button onclick="togglePointsOfInterest()">Points of Interest</button>
+            </div>
+            <div id="pointsOfInterestContent">
+                <div class="poi">
+                    <h3>City Park</h3>
+                    <p>Location: 123 Main St, City</p>
+                    <p>Description: A popular park with walking trails and picnic areas.</p>
+                </div>
+
+                <div class="poi">
+                    <h3>Downtown Museum</h3>
+                    <p>Location: 456 Elm St, Downtown</p>
+                    <p>Description: Explore local history and art exhibits.</p>
+                </div>
+
+                <div class="poi">
+                    <h3>Beachfront Restaurant</h3>
+                    <p>Location: 789 Ocean Ave, Beach City</p>
+                    <p>Description: Enjoy seafood and ocean views.</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button onclick="toggleCustomLayers()">Custom Layers</button>
+            </div>
+            <div id="custom-layer-section">
+                <label><input type="checkbox" id="radarLayer"> Radar Layer</label><br>
+                <label><input type="checkbox" id="temperatureLayer"> Temperature Layer</label><br>
+                <label><input type="checkbox" id="precipitationLayer"> Precipitation Layer</label><br>
+                <!-- Add more custom layers as needed -->
+            </div>
+
+            <div class="controls">
+                <button onclick="toggleUserReviews()">User Reviews</button>
+            </div>
+
+            <div id="user-reviews-section">
+                <!-- User reviews UI -->
+                <ul class="user-review-items">
+                    <li>Emily Johnson</li>
+                    <li>Map directions on this weather report and forecast website are straightforward and reliable. The
+                        interface allows users to input start and destination addresses effortlessly, providing accurate
+                        routing information with clear turn-by-turn directions. The integration of real-time traffic
+                        updates ensures optimal route planning, making it a valuable tool for navigating weather
+                        conditions effectively. Overall, it's a user-friendly feature that enhances the site's utility
+                        for both everyday commutes and travel planning.</li>
+                    <li>Michael Anderson</li>
+                    <li>Navigating with the map directions on this weather website is a breeze. The interface is
+                        user-friendly, offering quick input for addresses and delivering precise routes with real-time
+                        updates. It's perfect for planning trips or checking local traffic conditions, making it a go-to
+                        tool for hassle-free travel coordination.</li>
+                    <!-- Add more user reviews as needed -->
+                </ul>
+            </div>
+
+            <div class="controls">
+                <button onclick="toggleEventActivities()">Events and Activities</button>
+            </div>
+
+            <div id="events-activities-section">
+                <div class="event">
+                    <h3>Concert in the Park</h3>
+                    <p>Date: July 15th, 2024</p>
+                    <p>Time: 7:00 PM - 10:00 PM</p>
+                    <p>Location: Central Park</p>
+
+                </div>
+
+                <div class="event">
+                    <h3>Art Exhibition</h3>
+                    <p>Date: July 20th, 2024</p>
+                    <p>Time: 11:00 AM - 5:00 PM</p>
+                    <p>Location: City Art Gallery</p>
+
+                </div>
+                <!-- Add more events as needed -->
+            </div>
+
+
+            </main>
+
+            <footer>
+                <p>&copy; 2024 Weather Maps Website. All rights reserved.</p>
+            </footer>
+
+
+            <script>
+                function initMap() {
+                    // Initial coordinates for the map (default: New York City)
+                    var initialCoords = { lat: 40.7128, lng: -74.006 };
+
+                    // Create a map object and specify the DOM element for display
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: initialCoords,
+                        zoom: 8 // Initial zoom level
+                    });
+
+                    // Function to handle location search
+                    document.getElementById('searchButton').addEventListener('click', function () {
+                        var geocoder = new google.maps.Geocoder();
+                        var address = document.getElementById('searchInput').value;
+
+                        geocoder.geocode({ 'address': address }, function (results, status) {
+                            if (status === 'OK') {
+                                map.setCenter(results[0].geometry.location);
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location
+                                });
+                            } else {
+                                alert('Geocode was not successful for the following reason: ' + status);
+                            }
+                        });
+                    });
+
+                    // Function to handle zoom in
+                    document.getElementById('zoomIn').addEventListener('click', function () {
+                        map.setZoom(map.getZoom() + 1);
+                    });
+
+                    // Function to handle zoom out
+                    document.getElementById('zoomOut').addEventListener('click', function () {
+                        map.setZoom(map.getZoom() - 1);
+                    });
+                }
+                function togglePointsOfInterest() {
+                    var content = document.getElementById("pointsOfInterestContent");
+                    if (content.style.display === "none" || content.style.display === "") {
+                        content.style.display = "block";
+                    } else {
+                        content.style.display = "none";
+                    }
+                }
+                function toggleCustomLayers() {
+                    var content = document.getElementById("custom-layer-section");
+                    if (content.style.display === "none" || content.style.display === "") {
+                        content.style.display = "block";
+                    } else {
+                        content.style.display = "none";
+                    }
+                }
+                function toggleUserReviews() {
+                    var content = document.getElementById("user-reviews-section");
+                    if (content.style.display === "none" || content.style.display === "") {
+                        content.style.display = "block";
+                    } else {
+                        content.style.display = "none";
+                    }
+                }
+                function toggleEventActivities() {
+                    var content = document.getElementById("events-activities-section");
+                    if (content.style.display === "none" || content.style.display === "") {
+                        content.style.display = "block";
+                    } else {
+                        content.style.display = "none";
+                    }
+                }
+            </script>
+
+</body>
+
+</html>
